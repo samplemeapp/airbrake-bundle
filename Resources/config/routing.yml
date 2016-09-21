@@ -1,0 +1,3 @@
+sm_airbrake_homepage:
+    path:     /
+    defaults: { _controller: SMAirbrakeBundle:Default:index }

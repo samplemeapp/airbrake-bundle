@@ -1,0 +1,16 @@
+{
+    "name": "samplemeapp/airbrake-bundle",
+    "description": "Symfony 3 bundle for sending errors into Airbrake",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Petre Pătrașc",
+            "email": "petre@dreamlabs.ro"
+        }
+    ],
+    "require": {
+        "airbrake/phpbrake": "^0.2.0",
+        "symfony/symfony": "^3.1"
+    }
+}

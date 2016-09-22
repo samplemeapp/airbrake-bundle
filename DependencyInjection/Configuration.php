@@ -2,27 +2,54 @@
 
 namespace SM\AirbrakeBundle\DependencyInjection;
 
+use SM\AirbrakeBundle\Enum\AirbrakeDefaultEnum;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This is the class that validates and merges configuration from your app/config files.
+ * Sets up the configuration parameters of the Airbrake bundle.
  *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/configuration.html}
+ * @package SM\AirbrakeBundle\DependencyInjection
+ * @author  Petre Pătrașc <petre@dreamlabs.ro>
  */
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritdoc}
+     * Generates the configuration tree builder.
+     *
+     * @return TreeBuilder
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sm_airbrake');
+        $rootNode    = $treeBuilder->root('sm_airbrake');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->scalarNode('project_id')
+                    ->defaultValue(AirbrakeDefaultEnum::PROJECT_ID)
+                    ->end()
+                ->scalarNode('project_key')
+                    ->defaultValue(AirbrakeDefaultEnum::PROJECT_KEY)
+                    ->end()
+                ->scalarNode('http_client')
+                    ->defaultValue(AirbrakeDefaultEnum::HTTP_CLIENT)
+                    ->end()
+                ->booleanNode('global_exception_instance')
+                    ->defaultValue(AirbrakeDefaultEnum::GLOBAL_EXCEPTION_INSTANCE)
+                    ->end()
+                ->booleanNode('global_error_and_exception_handler')
+                    ->defaultValue(AirbrakeDefaultEnum::GLOBAL_ERROR_AND_EXCEPTION_HANDLER)
+                    ->end()
+                ->scalarNode('host')
+                    ->defaultValue(AirbrakeDefaultEnum::HOST)
+                    ->end()
+                ->arrayNode('ignored_exceptions')
+                    ->prototype('scalar')->end()
+                    ->defaultValue(AirbrakeDefaultEnum::IGNORED_EXCEPTIONS)
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

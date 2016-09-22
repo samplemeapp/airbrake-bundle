@@ -1,4 +1,6 @@
 services:
-#    sm_airbrake.example:
-#        class: SM\AirbrakeBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+  sm_airbrake.notifier.builder:
+    class: SM\AirbrakeBundle\Builder\NotifierBuilder
+
+  sm_airbrake.airbrake.service:
+    class: SM\AirbrakeBundle\Service\AirbrakeService

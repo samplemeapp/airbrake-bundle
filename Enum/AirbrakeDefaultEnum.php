@@ -19,5 +19,7 @@ final class AirbrakeDefaultEnum
     const GLOBAL_EXCEPTION_INSTANCE = false;
     const GLOBAL_ERROR_AND_EXCEPTION_HANDLER = false;
     const IGNORED_EXCEPTIONS = [];
-    const ROOT_DIRECTORY = '/';
+    const ROOT_DIRECTORY = 'undefined';
+    const ENVIRONMENT = 'undefined';
+    const APP_VERSION = 'undefined';
 }

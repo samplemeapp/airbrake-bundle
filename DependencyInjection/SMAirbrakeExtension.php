@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace SM\AirbrakeBundle\DependencyInjection;
 
+use SM\AirbrakeBundle\Enum\AirbrakeDefaultEnum;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -35,6 +36,38 @@ class SMAirbrakeExtension extends Extension
         foreach ($config as $configKey => $configValue) {
             $container->setParameter("sm_airbrake.{$configKey}", $configValue);
         }
-        $container->setParameter('sm_airbrake.root_directory', dirname($container->getParameter('kernel.root_dir')));
+        unset($configKey);
+        unset($configValue);
+        unset($configs);
+
+        if (AirbrakeDefaultEnum::ROOT_DIRECTORY === $config['root_directory']) {
+            $container->setParameter('sm_airbrake.root_directory', dirname($container->getParameter('kernel.root_dir')));
+        }
+
+        if (AirbrakeDefaultEnum::ENVIRONMENT === $config['environment'] && $container->hasParameter('app.environment')) {
+            $container->setParameter('sm_airbrake.environment', $container->getParameter('app.environment'));
+        }
+
+        if (AirbrakeDefaultEnum::APP_VERSION === $config['app_version']) {
+            $container->setParameter('sm_airbrake.app_version', $this->getAppVersion($container));
+        }
+    }
+
+    /**
+     * Get the application version from the VERSION file in the root directory.
+     *
+     * @param ContainerBuilder $container
+     *
+     * @return string
+     */
+    private function getAppVersion(ContainerBuilder $container): string
+    {
+        $kernelRootDir = dirname($container->getParameter('kernel.root_dir'));
+
+        if (false === file_exists("{$kernelRootDir}/VERSION")) {
+            return AirbrakeDefaultEnum::APP_VERSION;
+        }
+
+        return file_get_contents("$kernelRootDir/VERSION");
     }
 }

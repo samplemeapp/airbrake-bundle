@@ -111,6 +111,38 @@ class NotifierBuilderTest extends \PHPUnit_Framework_TestCase
         $this->notifierBuilder->withRootDirectory(self::INVALID_STRING);
     }
 
+    public function testGivenThatAnEmptyEnvironmentIsProvidedThenAConfigurationExceptionWillBeThrown()
+    {
+        $this->expectException('SM\AirbrakeBundle\Exception\AirbrakeConfigurationException');
+        $this->expectExceptionMessage('Environment cannot be empty');
+
+        $this->notifierBuilder->withEnvironment(self::EMPTY_STRING);
+    }
+
+    public function testGivenThatAnInvalidEnvironmentDirectoryIsProvidedThenAConfigurationExceptionWillBeThrown()
+    {
+        $this->expectException('SM\AirbrakeBundle\Exception\AirbrakeConfigurationException');
+        $this->expectExceptionMessage('Environment cannot be empty');
+
+        $this->notifierBuilder->withEnvironment(self::INVALID_STRING);
+    }
+
+    public function testGivenThatAnEmptyAppVersionIsProvidedThenAConfigurationExceptionWillBeThrown()
+    {
+        $this->expectException('SM\AirbrakeBundle\Exception\AirbrakeConfigurationException');
+        $this->expectExceptionMessage('App version cannot be empty');
+
+        $this->notifierBuilder->withAppVersion(self::EMPTY_STRING);
+    }
+
+    public function testGivenThatAnInvalidAppVersionDirectoryIsProvidedThenAConfigurationExceptionWillBeThrown()
+    {
+        $this->expectException('SM\AirbrakeBundle\Exception\AirbrakeConfigurationException');
+        $this->expectExceptionMessage('App version cannot be empty');
+
+        $this->notifierBuilder->withAppVersion(self::INVALID_STRING);
+    }
+
     public function testGivenThatAValidParametersAreProvidedThenTheNotifierInstanceWillBeConstructedCorrectly()
     {
         $notifierInstance = $this->notifierBuilder
@@ -122,6 +154,8 @@ class NotifierBuilderTest extends \PHPUnit_Framework_TestCase
                 'Symfony\Component\HttpKernel\Exception\HttpException',
                 'Symfony\Component\Security\Core\Exception\AccessDeniedException',
             ])
+            ->withEnvironment('PRD')
+            ->withAppVersion('1.0')
             ->build();
 
         $this->assertTrue($notifierInstance instanceof Notifier);

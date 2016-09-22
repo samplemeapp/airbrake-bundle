@@ -48,7 +48,16 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('ignored_exceptions')
                     ->prototype('scalar')->end()
                     ->defaultValue(AirbrakeDefaultEnum::IGNORED_EXCEPTIONS)
-                ->end()
+                    ->end()
+                ->scalarNode('root_directory')
+                    ->defaultValue(AirbrakeDefaultEnum::ROOT_DIRECTORY)
+                    ->end()
+                ->scalarNode('environment')
+                    ->defaultValue(AirbrakeDefaultEnum::ENVIRONMENT)
+                    ->end()
+                ->scalarNode('app_version')
+                    ->defaultValue(AirbrakeDefaultEnum::APP_VERSION)
+                    ->end()
             ->end()
         ;
 

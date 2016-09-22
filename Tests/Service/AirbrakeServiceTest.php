@@ -86,6 +86,8 @@ class AirbrakeServiceTest extends \PHPUnit_Framework_TestCase
             ],
             'globalExceptionInstance'        => true,
             'globalErrorAndExceptionHandler' => false,
+            'environment'                    => 'PRD',
+            'appVersion'                     => '1.0',
         ];
 
         return $configurationParameters;
@@ -107,7 +109,9 @@ class AirbrakeServiceTest extends \PHPUnit_Framework_TestCase
             $configurationParameters['host'],
             $configurationParameters['httpClient'],
             $configurationParameters['rootDirectory'],
-            $configurationParameters['ignoredExceptions']
+            $configurationParameters['ignoredExceptions'],
+            $configurationParameters['environment'],
+            $configurationParameters['appVersion']
         );
 
         return $aibrakeService;

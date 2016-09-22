@@ -75,5 +75,20 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         /** @var ScalarNode $httpClientNode */
         $httpClientNode = $children['http_client'];
         $this->assertEquals(AirbrakeDefaultEnum::HTTP_CLIENT, $httpClientNode->getDefaultValue());
+
+        $this->assertArrayHasKey('root_directory', $children);
+        /** @var ScalarNode $rootDirectoryNode */
+        $rootDirectoryNode = $children['root_directory'];
+        $this->assertEquals(AirbrakeDefaultEnum::ROOT_DIRECTORY, $rootDirectoryNode->getDefaultValue());
+
+        $this->assertArrayHasKey('environment', $children);
+        /** @var ScalarNode $environmentNode */
+        $environmentNode = $children['environment'];
+        $this->assertEquals(AirbrakeDefaultEnum::ENVIRONMENT, $environmentNode->getDefaultValue());
+
+        $this->assertArrayHasKey('app_version', $children);
+        /** @var ScalarNode $appVersionNode */
+        $appVersionNode = $children['app_version'];
+        $this->assertEquals(AirbrakeDefaultEnum::APP_VERSION, $appVersionNode->getDefaultValue());
     }
 }

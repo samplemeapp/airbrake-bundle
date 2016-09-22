@@ -47,8 +47,10 @@ class AirbrakeService
      * @param string          $httpClient
      * @param string          $rootDirectory
      * @param array           $ignoredExceptions
+     * @param string          $environment
+     * @param string          $appVersion
      */
-    public function __construct(NotifierBuilder $notifierBuilder, string $projectId, string $projectKey, bool $globalExceptionInstance, bool $globalErrorAndExceptionHandler, string $host, string $httpClient, string $rootDirectory, array $ignoredExceptions = [])
+    public function __construct(NotifierBuilder $notifierBuilder, string $projectId, string $projectKey, bool $globalExceptionInstance, bool $globalErrorAndExceptionHandler, string $host, string $httpClient, string $rootDirectory, array $ignoredExceptions = [], string $environment, string $appVersion)
     {
         $this->notifier = $notifierBuilder
             ->withProjectKey($projectKey)
@@ -57,6 +59,8 @@ class AirbrakeService
             ->withHttpClient($httpClient)
             ->withIgnoredExceptions($ignoredExceptions)
             ->withRootDirectory($rootDirectory)
+            ->withEnvironment($environment)
+            ->withAppVersion($appVersion)
             ->build();
 
         $this

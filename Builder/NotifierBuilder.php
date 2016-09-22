@@ -47,6 +47,16 @@ class NotifierBuilder implements BuilderInterface
     protected $ignoredExceptions;
 
     /**
+     * @var string
+     */
+    protected $environment;
+
+    /**
+     * @var string
+     */
+    protected $appVersion;
+
+    /**
      * NotifierBuilder constructor.
      */
     public function __construct()
@@ -116,6 +126,28 @@ class NotifierBuilder implements BuilderInterface
         return $this;
     }
 
+    public function withEnvironment(string $environment): NotifierBuilder
+    {
+        if (empty(trim($environment))) {
+            throw new AirbrakeConfigurationException('Environment cannot be empty');
+        }
+
+        $this->environment = $environment;
+
+        return $this;
+    }
+
+    public function withAppVersion(string $appVersion): NotifierBuilder
+    {
+        if (empty(trim($appVersion))) {
+            throw new AirbrakeConfigurationException('App version cannot be empty');
+        }
+
+        $this->appVersion = $appVersion;
+
+        return $this;
+    }
+
     /**
      * @inheritDoc
      */
@@ -127,6 +159,8 @@ class NotifierBuilder implements BuilderInterface
             'host'          => $this->host,
             'rootDirectory' => $this->rootDirectory,
             'httpClient'    => $this->httpClient,
+            'environment'   => $this->environment,
+            'appVersion'    => $this->appVersion,
         ]);
 
         if (false === empty($this->ignoredExceptions)) {
@@ -156,5 +190,7 @@ class NotifierBuilder implements BuilderInterface
         $this->httpClient        = AirbrakeDefaultEnum::HTTP_CLIENT;
         $this->ignoredExceptions = AirbrakeDefaultEnum::IGNORED_EXCEPTIONS;
         $this->rootDirectory     = AirbrakeDefaultEnum::ROOT_DIRECTORY;
+        $this->environment       = AirbrakeDefaultEnum::ENVIRONMENT;
+        $this->appVersion        = AirbrakeDefaultEnum::APP_VERSION;
     }
 }

@@ -38,11 +38,39 @@ class SMAirbrakeExtensionTest extends \PHPUnit_Framework_TestCase
         $this->extension->load($configs, $containerBuilder);
     }
 
+    public function testGivenThatNoConfigurationIsMadeThenTheConfigurationParametersAreStillExposedUsingTheirDefaultValues()
+    {
+        $configs          = [];
+        $containerBuilder = $this->getContainerMock();
+
+        $containerBuilder->expects($this->atLeastOnce())->method('setParameter');
+        $containerBuilder->expects($this->atLeastOnce())->method('getParameter')->with('kernel.root_dir')->willReturn(__FILE__);
+
+        $this->extension->load($configs, $containerBuilder);
+    }
+
+    public function testGivenNoConfigurationAndHavingAnAppVersionStoredInTheContainerFromEnvironmentalVariablesOrOtherwiseThenTheContainerParametersWillBePopulatedWithTheCustomValue()
+    {
+        $configs          = [
+            'sm_airbrake' => [
+                'root_directory' => '/var/www/symfony/app',
+                'app_version'    => '1.0RC',
+            ]
+        ];
+        $containerBuilder = $this->getContainerMock();
+
+        $containerBuilder->expects($this->atLeastOnce())->method('setParameter');
+        $containerBuilder->expects($this->atLeastOnce())->method('hasParameter')->with('app.environment')->willReturn(true);
+        $containerBuilder->expects($this->atLeastOnce())->method('getParameter')->with('app.environment')->willReturn('TST');
+
+        $this->extension->load($configs, $containerBuilder);
+    }
+
     private function getContainerMock(): \PHPUnit_Framework_MockObject_MockObject
     {
         return $this->getMockBuilder('Symfony\Component\DependencyInjection\ContainerBuilder')
             ->disableOriginalConstructor()
-            ->setMethods(['setParameter', 'getParameter'])
+            ->setMethods(['setParameter', 'getParameter', 'hasParameter'])
             ->getMock();
     }
 

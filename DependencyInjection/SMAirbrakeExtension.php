@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace SM\AirbrakeBundle\DependencyInjection;
 
@@ -30,5 +31,10 @@ class SMAirbrakeExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
+
+        foreach ($config as $configKey => $configValue) {
+            $container->setParameter("sm_airbrake.{$configKey}", $configValue);
+        }
+        $container->setParameter('sm_airbrake.root_directory', dirname($container->getParameter('kernel.root_dir')));
     }
 }

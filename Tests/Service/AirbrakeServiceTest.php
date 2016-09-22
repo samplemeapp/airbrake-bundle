@@ -6,6 +6,7 @@ namespace SM\AirbrakeBundle\Tests\Service;
 
 
 use Airbrake\ErrorHandler;
+use Airbrake\Notifier;
 use SM\AirbrakeBundle\Builder\NotifierBuilder;
 use SM\AirbrakeBundle\Service\AirbrakeService;
 
@@ -45,6 +46,7 @@ class AirbrakeServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($airbrakeService instanceof AirbrakeService);
 
         $this->assertNull($airbrakeService->getErrorHandler());
+        $this->assertTrue($airbrakeService->getNotifier() instanceof Notifier);
     }
 
     public function testGivenThatTheErrorHandlerIsRequiredThenTheInstanceWillBeAccessibleOnTheService()

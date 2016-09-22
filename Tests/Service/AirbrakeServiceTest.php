@@ -93,6 +93,52 @@ class AirbrakeServiceTest extends \PHPUnit_Framework_TestCase
         return $configurationParameters;
     }
 
+    public function testGivenThatTheAirbrakeNotificationEncounteredAnErrorThenTheNotifyMethodWillReturnFalse()
+    {
+        $notifierMock = $this->getMockBuilder('Airbrake\Notifier')
+            ->setMethods(['notify'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $notifierMock->expects($this->atLeastOnce())->method('notify')->willReturn([
+            'error' => 'This is a mock test'
+        ]);
+
+        $configurationParameters = $this->getValidConfigurationParameters();
+        $airbrakeService         = $this->createServiceFromConfigurationParameters($configurationParameters);
+
+        $airbrakeReflection = new \ReflectionClass($airbrakeService);
+        $notifierProperty   = $airbrakeReflection->getProperty('notifier');
+        $notifierProperty->setAccessible(true);
+        $notifierProperty->setValue($airbrakeService, $notifierMock);
+
+        $this->expectException('SM\AirbrakeBundle\Exception\AirbrakeConnectionException');
+        $this->expectExceptionMessage('This is a mock test');
+
+        $airbrakeService->notify(new \Exception);
+    }
+
+    public function testGivenThatTheAirbrakeNotificationDidNotEncounterAnErrorThenTheNotifyMethodWillReturnTrue()
+    {
+        $notifierMock = $this->getMockBuilder('Airbrake\Notifier')
+            ->setMethods(['notify'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $notifierMock->expects($this->atLeastOnce())->method('notify')->willReturn([
+            'id' => 123456,
+        ]);
+
+        $configurationParameters = $this->getValidConfigurationParameters();
+        $airbrakeService         = $this->createServiceFromConfigurationParameters($configurationParameters);
+
+        $airbrakeReflection = new \ReflectionClass($airbrakeService);
+        $notifierProperty   = $airbrakeReflection->getProperty('notifier');
+        $notifierProperty->setAccessible(true);
+        $notifierProperty->setValue($airbrakeService, $notifierMock);
+
+        $operationValid = $airbrakeService->notify(new \Exception);
+        $this->assertTrue($operationValid);
+    }
+
     /**
      * @param $configurationParameters
      *

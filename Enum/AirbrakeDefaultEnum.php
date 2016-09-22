@@ -22,4 +22,5 @@ final class AirbrakeDefaultEnum
     const ROOT_DIRECTORY = 'undefined';
     const ENVIRONMENT = 'undefined';
     const APP_VERSION = 'undefined';
+    const LISTNER_ENABLED = false;
 }

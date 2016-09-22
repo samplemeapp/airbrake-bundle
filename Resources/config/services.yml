@@ -4,3 +4,15 @@ services:
 
   sm_airbrake.airbrake.service:
     class: SM\AirbrakeBundle\Service\AirbrakeService
+    arguments:
+      - "@sm_airbrake.notifier.builder"
+      - "%sm_airbrake.project_id%"
+      - "%sm_airbrake.project_key%"
+      - "%sm_airbrake.global_exception_instance%"
+      - "%sm_airbrake.global_error_and_exception_handler%"
+      - "%sm_airbrake.host%"
+      - "%sm_airbrake.http_client%"
+      - "%sm_airbrake.root_directory%"
+      - "%sm_airbrake.ignored_exceptions%"
+      - "%sm_airbrake.environment%"
+      - "%sm_airbrake.app_version%"

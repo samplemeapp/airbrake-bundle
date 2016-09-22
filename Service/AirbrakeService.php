@@ -9,6 +9,7 @@ use Airbrake\ErrorHandler;
 use Airbrake\Instance;
 use Airbrake\Notifier;
 use SM\AirbrakeBundle\Builder\NotifierBuilder;
+use SM\AirbrakeBundle\Exception\AirbrakeConnectionException;
 
 /**
  * Defines the Airbrake service wrapper.
@@ -68,6 +69,24 @@ class AirbrakeService
             ->withGlobalErrorAndExceptionHandler($globalErrorAndExceptionHandler);
     }
 
+    /**
+     * Notify Airbrake of the exception.
+     *
+     * @param \Exception $exception
+     *
+     * @return bool
+     * @throws AirbrakeConnectionException
+     */
+    public function notify(\Exception $exception): bool
+    {
+        $airbrakeResponse = $this->notifier->notify($exception);
+
+        if (array_key_exists('id', $airbrakeResponse)) {
+            return true;
+        }
+
+        throw new AirbrakeConnectionException($airbrakeResponse['error']);
+    }
 
     /**
      * @return Notifier

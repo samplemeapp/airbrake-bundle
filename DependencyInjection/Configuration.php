@@ -58,6 +58,9 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('app_version')
                     ->defaultValue(AirbrakeDefaultEnum::APP_VERSION)
                     ->end()
+                ->booleanNode('listener_enabled')
+                    ->defaultValue(AirbrakeDefaultEnum::LISTNER_ENABLED)
+                    ->end()
             ->end()
         ;
 

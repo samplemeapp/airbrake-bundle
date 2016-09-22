@@ -1,0 +1,6 @@
+services:
+  sm_airbrake.airbrake_exception.listener:
+    class: SM\AirbrakeBundle\Listener\AirbrakeExceptionListener
+    arguments:
+      - "%sm_airbrake.listener_enabled%"
+      - "@sm_airbrake.airbrake.service"

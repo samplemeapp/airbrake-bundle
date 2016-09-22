@@ -90,5 +90,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         /** @var ScalarNode $appVersionNode */
         $appVersionNode = $children['app_version'];
         $this->assertEquals(AirbrakeDefaultEnum::APP_VERSION, $appVersionNode->getDefaultValue());
+
+        $this->assertArrayHasKey('listener_enabled', $children);
+        /** @var ScalarNode $listenerEnabledNode */
+        $listenerEnabledNode = $children['listener_enabled'];
+        $this->assertEquals(AirbrakeDefaultEnum::LISTNER_ENABLED, $listenerEnabledNode->getDefaultValue());
     }
 }

@@ -11,6 +11,12 @@ use Symfony\Component\Config\Definition\ArrayNode;
 use Symfony\Component\Config\Definition\BooleanNode;
 use Symfony\Component\Config\Definition\ScalarNode;
 
+/**
+ * Tests the functionality of the bundle configuration class.
+ *
+ * @package SM\AirbrakeBundle\Tests\DependencyInjection
+ * @author  Petre Pătrașc <petre@dreamlabs.ro>
+ */
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     /**

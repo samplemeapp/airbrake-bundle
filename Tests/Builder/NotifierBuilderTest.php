@@ -9,7 +9,7 @@ use Airbrake\Notifier;
 use SM\AirbrakeBundle\Builder\NotifierBuilder;
 
 /**
- * Test the functionality of the builder to construct Notifiers.
+ * Test the functionality of the builder that handles Notifiers.
  *
  * @package SM\AirbrakeBundle\Tests\Builder
  * @author  Petre Pătrașc <petre@dreamlabs.ro>

@@ -30,8 +30,7 @@ class SMAirbrakeExtension extends Extension
         $configuration = new Configuration();
         $config        = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.yml');
+        $this->loadServiceDefinitions($container);
 
         foreach ($config as $configKey => $configValue) {
             $container->setParameter("sm_airbrake.{$configKey}", $configValue);
@@ -98,7 +97,7 @@ class SMAirbrakeExtension extends Extension
      * Configure the application version parameter.
      *
      * @param ContainerBuilder $container
-     * @param array $config
+     * @param array            $config
      */
     protected function configureAppVersion(ContainerBuilder $container, array $config)
     {
@@ -107,6 +106,23 @@ class SMAirbrakeExtension extends Extension
                 'sm_airbrake.app_version',
                 $this->getAppVersion($container)
             );
+        }
+    }
+
+    /**
+     * Load the service definitions.
+     *
+     * @param ContainerBuilder $container
+     */
+    protected function loadServiceDefinitions(ContainerBuilder $container)
+    {
+        $loader          = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $definitionFiles = [
+            'services.yml',
+            'listeners.yml',
+        ];
+        foreach ($definitionFiles as $file) {
+            $loader->load($file);
         }
     }
 }

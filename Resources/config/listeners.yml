@@ -4,3 +4,5 @@ services:
     arguments:
       - "%sm_airbrake.listener_enabled%"
       - "@sm_airbrake.airbrake.service"
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

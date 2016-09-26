@@ -41,15 +41,25 @@ class SMAirbrakeExtension extends Extension
         unset($configs);
 
         if (AirbrakeDefaultEnum::ROOT_DIRECTORY === $config['root_directory']) {
-            $container->setParameter('sm_airbrake.root_directory', dirname($container->getParameter('kernel.root_dir')));
+            $container->setParameter(
+                'sm_airbrake.root_directory',
+                dirname($container->getParameter('kernel.root_dir'))
+            );
         }
 
-        if (AirbrakeDefaultEnum::ENVIRONMENT === $config['environment'] && $container->hasParameter('app.environment')) {
-            $container->setParameter('sm_airbrake.environment', $container->getParameter('app.environment'));
+        if (AirbrakeDefaultEnum::ENVIRONMENT === $config['environment']
+            && $container->hasParameter('app.environment')) {
+            $container->setParameter(
+                'sm_airbrake.environment',
+                $container->getParameter('app.environment')
+            );
         }
 
         if (AirbrakeDefaultEnum::APP_VERSION === $config['app_version']) {
-            $container->setParameter('sm_airbrake.app_version', $this->getAppVersion($container));
+            $container->setParameter(
+                'sm_airbrake.app_version',
+                $this->getAppVersion($container)
+            );
         }
     }
 

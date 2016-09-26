@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace SM\AirbrakeBundle\Tests\DependencyInjection;
 
-
 use SM\AirbrakeBundle\DependencyInjection\Configuration;
 use SM\AirbrakeBundle\Enum\AirbrakeDefaultEnum;
 use Symfony\Component\Config\Definition\ArrayNode;

@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace SM\AirbrakeBundle\Tests\Service;
 
-
 use Airbrake\ErrorHandler;
 use Airbrake\Notifier;
 use SM\AirbrakeBundle\Builder\NotifierBuilder;

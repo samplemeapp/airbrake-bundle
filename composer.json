@@ -1,12 +1,26 @@
 {
   "name": "samplemeapp/airbrake-bundle",
-  "description": "PHP 7+, Symfony 3 bundle for sending errors into Airbrake",
+  "description": "PHP 7, Symfony 2.8+ bundle for sending errors into Airbrake",
   "type": "symfony-bundle",
   "license": "MIT",
+  "keywords": [
+    "sampleme",
+    "airbrake",
+    "samplemeapp",
+    "errbit",
+    "php",
+    "symfony",
+    "bundle",
+    "exception",
+    "error"
+  ],
+  "homepage": "https://github.com/samplemeapp/airbrake-bundle",
   "authors": [
     {
       "name": "Petre Pătrașc",
-      "email": "petre@dreamlabs.ro"
+      "email": "petre@dreamlabs.ro",
+      "homepage": "https://www.dreamlabs.ro",
+      "role": "Developer"
     }
   ],
   "require": {
@@ -15,11 +29,20 @@
     "php": "^7.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.5"
+    "phpunit/phpunit": "^5.5",
+    "squizlabs/php_codesniffer": "^2.7"
   },
   "autoload": {
     "psr-4": {
       "SM\\AirbrakeBundle\\": ""
     }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 Builder DependencyInjection Enum Exception Listener Service",
+    "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 Builder DependencyInjection Enum Exception Listener Service"
+  },
+  "config": {
+    "sort-packages": true
   }
 }

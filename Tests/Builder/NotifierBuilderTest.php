@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace SM\AirbrakeBundle\Tests\Builder;
 
-
 use Airbrake\Notifier;
 use SM\AirbrakeBundle\Builder\NotifierBuilder;
 

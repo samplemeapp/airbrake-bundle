@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace SM\AirbrakeBundle\Service;
 
-
 use Airbrake\ErrorHandler;
 use Airbrake\Instance;
 use Airbrake\Notifier;
@@ -51,8 +50,20 @@ class AirbrakeService
      * @param string          $environment
      * @param string          $appVersion
      */
-    public function __construct(NotifierBuilder $notifierBuilder, string $projectId, string $projectKey, bool $globalExceptionInstance, bool $globalErrorAndExceptionHandler, string $host, string $httpClient, string $rootDirectory, array $ignoredExceptions = [], string $environment, string $appVersion)
-    {
+    public function __construct(
+        NotifierBuilder $notifierBuilder,
+        string $projectId,
+        string $projectKey,
+        bool $globalExceptionInstance,
+        bool $globalErrorAndExceptionHandler,
+        string $host,
+        string $httpClient,
+        string $rootDirectory,
+        array $ignoredExceptions,
+        string $environment,
+        string $appVersion
+    ) {
+    
         $this->notifier = $notifierBuilder
             ->withProjectKey($projectKey)
             ->withProjectId($projectId)

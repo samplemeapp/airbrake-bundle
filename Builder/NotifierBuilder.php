@@ -163,17 +163,7 @@ class NotifierBuilder implements BuilderInterface
             'appVersion'    => $this->appVersion,
         ]);
 
-        if (false === empty($this->ignoredExceptions)) {
-            $notifierInstance->addFilter(function ($notice) {
-                foreach ($this->ignoredExceptions as $exceptionClass) {
-                    if ($notice['errors'][0]['type'] === $exceptionClass) {
-                        return null;
-                    }
-                }
-
-                return $notice;
-            });
-        }
+        $this->addFilteredExceptions($notifierInstance);
         $this->clear();
 
         return $notifierInstance;
@@ -192,5 +182,25 @@ class NotifierBuilder implements BuilderInterface
         $this->rootDirectory     = AirbrakeDefaultEnum::ROOT_DIRECTORY;
         $this->environment       = AirbrakeDefaultEnum::ENVIRONMENT;
         $this->appVersion        = AirbrakeDefaultEnum::APP_VERSION;
+    }
+
+    /**
+     * Add filtered exceptions to the notifier.
+     *
+     * @param Notifier $notifierInstance
+     */
+    protected function addFilteredExceptions(Notifier $notifierInstance)
+    {
+        if (false === empty($this->ignoredExceptions)) {
+            $notifierInstance->addFilter(function ($notice) {
+                foreach ($this->ignoredExceptions as $exceptionClass) {
+                    if ($notice['errors'][0]['type'] === $exceptionClass) {
+                        return null;
+                    }
+                }
+
+                return $notice;
+            });
+        }
     }
 }

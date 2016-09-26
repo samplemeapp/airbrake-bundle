@@ -36,31 +36,10 @@ class SMAirbrakeExtension extends Extension
         foreach ($config as $configKey => $configValue) {
             $container->setParameter("sm_airbrake.{$configKey}", $configValue);
         }
-        unset($configKey);
-        unset($configValue);
-        unset($configs);
 
-        if (AirbrakeDefaultEnum::ROOT_DIRECTORY === $config['root_directory']) {
-            $container->setParameter(
-                'sm_airbrake.root_directory',
-                dirname($container->getParameter('kernel.root_dir'))
-            );
-        }
-
-        if (AirbrakeDefaultEnum::ENVIRONMENT === $config['environment']
-            && $container->hasParameter('app.environment')) {
-            $container->setParameter(
-                'sm_airbrake.environment',
-                $container->getParameter('app.environment')
-            );
-        }
-
-        if (AirbrakeDefaultEnum::APP_VERSION === $config['app_version']) {
-            $container->setParameter(
-                'sm_airbrake.app_version',
-                $this->getAppVersion($container)
-            );
-        }
+        $this->configureRootDirectory($container, $config);
+        $this->configureEnvironment($container, $config);
+        $this->configureAppVersion($container, $config);
     }
 
     /**
@@ -79,5 +58,55 @@ class SMAirbrakeExtension extends Extension
         }
 
         return file_get_contents("$kernelRootDir/VERSION");
+    }
+
+    /**
+     * Configure the root directory parameter.
+     *
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
+    protected function configureRootDirectory(ContainerBuilder $container, array $config)
+    {
+        if (AirbrakeDefaultEnum::ROOT_DIRECTORY === $config['root_directory']) {
+            $container->setParameter(
+                'sm_airbrake.root_directory',
+                dirname($container->getParameter('kernel.root_dir'))
+            );
+        }
+    }
+
+    /**
+     * Configure the environment parameter.
+     *
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
+    protected function configureEnvironment(ContainerBuilder $container, array $config)
+    {
+        if (AirbrakeDefaultEnum::ENVIRONMENT === $config['environment']
+            && $container->hasParameter('app.environment')
+        ) {
+            $container->setParameter(
+                'sm_airbrake.environment',
+                $container->getParameter('app.environment')
+            );
+        }
+    }
+
+    /**
+     * Configure the application version parameter.
+     *
+     * @param ContainerBuilder $container
+     * @param array $config
+     */
+    protected function configureAppVersion(ContainerBuilder $container, array $config)
+    {
+        if (AirbrakeDefaultEnum::APP_VERSION === $config['app_version']) {
+            $container->setParameter(
+                'sm_airbrake.app_version',
+                $this->getAppVersion($container)
+            );
+        }
     }
 }

@@ -82,8 +82,8 @@ sm_airbrake:
     # Exception class paths that should be ignored. Useful for not overloading your logs.
     # Defaults to [].
     ignored_exceptions:
-        - "Symfony\Component\HttpKernel\Exception\HttpException"
-        - "Symfony\Component\Security\Core\Exception\AccessDeniedException"
+        - "Symfony\\Component\\HttpKernel\\Exception\\HttpException"
+        - "Symfony\\Component\\Security\\Core\\Exception\\AccessDeniedException"
         
     # The root directory that should be reported to the host
     # Defaults to the 'kernel.root_dir' parameter

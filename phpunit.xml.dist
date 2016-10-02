@@ -14,7 +14,7 @@
 
     <testsuites>
         <testsuite name="Airbrake Bundle Test Suite">
-            <directory>Tests</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
@@ -22,9 +22,9 @@
         <whitelist>
             <directory>.</directory>
             <exclude>
-                <directory>./Resources</directory>
+                <directory>./src/Resources</directory>
                 <directory>./vendor</directory>
-                <directory>./Tests</directory>
+                <directory>./tests</directory>
             </exclude>
         </whitelist>
     </filter>

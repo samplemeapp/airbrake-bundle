@@ -34,7 +34,12 @@
   },
   "autoload": {
     "psr-4": {
-      "SM\\AirbrakeBundle\\": ""
+      "SM\\AirbrakeBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SM\\AirbrakeBundle\\Tests\\": "tests/"
     }
   },
   "scripts": {

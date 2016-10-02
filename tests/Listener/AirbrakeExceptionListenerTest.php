@@ -9,7 +9,7 @@ use SM\AirbrakeBundle\Listener\AirbrakeExceptionListener;
 /**
  * Test the functionality of the exception listener.
  *
- * @package SM\AirbrakeBundle\Tests\Listener
+ * @package SM\AirbrakeBundle\tests\Listener
  * @author  Petre Pătrașc <petre@dreamlabs.ro>
  */
 class AirbrakeExceptionListenerTest extends \PHPUnit_Framework_TestCase

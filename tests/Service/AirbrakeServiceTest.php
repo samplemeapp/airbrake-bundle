@@ -10,9 +10,9 @@ use SM\AirbrakeBundle\Builder\NotifierBuilder;
 use SM\AirbrakeBundle\Service\AirbrakeService;
 
 /**
- * Tests the behaviour of the Airbrake service.
+ * tests the behaviour of the Airbrake service.
  *
- * @package SM\AirbrakeBundle\Tests\Service
+ * @package SM\AirbrakeBundle\tests\Service
  * @author  Petre Pătrașc <petre@dreamlabs.ro>
  */
 class AirbrakeServiceTest extends \PHPUnit_Framework_TestCase

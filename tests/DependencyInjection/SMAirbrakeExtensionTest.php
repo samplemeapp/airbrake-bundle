@@ -9,7 +9,7 @@ use SM\AirbrakeBundle\DependencyInjection\SMAirbrakeExtension;
 /**
  * Test the behaviour of the bundle extension class.
  *
- * @package SM\AirbrakeBundle\Tests\DependencyInjection
+ * @package SM\AirbrakeBundle\tests\DependencyInjection
  * @author  Petre Pătrașc <petre@dreamlabs.ro>
  */
 class SMAirbrakeExtensionTest extends \PHPUnit_Framework_TestCase

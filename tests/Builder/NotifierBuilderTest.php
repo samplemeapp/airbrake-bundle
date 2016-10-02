@@ -10,7 +10,7 @@ use SM\AirbrakeBundle\Builder\NotifierBuilder;
 /**
  * Test the functionality of the builder that handles Notifiers.
  *
- * @package SM\AirbrakeBundle\Tests\Builder
+ * @package SM\AirbrakeBundle\tests\Builder
  * @author  Petre Pătrașc <petre@dreamlabs.ro>
  */
 class NotifierBuilderTest extends \PHPUnit_Framework_TestCase

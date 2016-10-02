@@ -15,7 +15,7 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-dist
 
 script:
-  - vendor/bin/phpcs --standard=psr2 Builder DependencyInjection Enum Exception Listener Service
+  - composer check-style
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_script:

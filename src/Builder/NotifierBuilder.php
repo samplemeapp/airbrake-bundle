@@ -192,8 +192,9 @@ class NotifierBuilder implements BuilderInterface
     protected function addFilteredExceptions(Notifier $notifierInstance)
     {
         if (false === empty($this->ignoredExceptions)) {
-            $notifierInstance->addFilter(function ($notice) {
-                foreach ($this->ignoredExceptions as $exceptionClass) {
+            $ignoredExceptions = $this->ignoredExceptions;
+            $notifierInstance->addFilter(function ($notice) use ($ignoredExceptions) {
+                foreach ($ignoredExceptions as $exceptionClass) {
                     if ($notice['errors'][0]['type'] === $exceptionClass) {
                         return null;
                     }

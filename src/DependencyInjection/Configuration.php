@@ -39,14 +39,18 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('global_exception_instance')
                     ->beforeNormalization()
                     ->ifString()
-                        ->then(function($v) { return in_array($v, array('1', 'true', 'on')); })
+                        ->then(function ($v) {
+                            return in_array($v, array('1', 'true', 'on'));
+                        })
                         ->end()
                     ->defaultValue(AirbrakeDefaultEnum::GLOBAL_EXCEPTION_INSTANCE)
                     ->end()
                 ->booleanNode('global_error_and_exception_handler')
                     ->beforeNormalization()
                     ->ifString()
-                        ->then(function($v) { return in_array($v, array('1', 'true', 'on')); })
+                        ->then(function ($v) {
+                            return in_array($v, array('1', 'true', 'on'));
+                        })
                         ->end()
                     ->defaultValue(AirbrakeDefaultEnum::GLOBAL_ERROR_AND_EXCEPTION_HANDLER)
                     ->end()
@@ -69,7 +73,9 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('listener_enabled')
                     ->beforeNormalization()
                     ->ifString()
-                        ->then(function($v) { return in_array($v, array('1', 'true', 'on')); })
+                        ->then(function ($v) {
+                            return in_array($v, array('1', 'true', 'on'));
+                        })
                         ->end()
                     ->defaultValue(AirbrakeDefaultEnum::LISTNER_ENABLED)
                     ->end()

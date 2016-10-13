@@ -93,15 +93,11 @@ class AirbrakeService
     {
         $airbrakeResponse = $this->notifier->notify($exception);
 
-        if (false === is_array($airbrakeResponse)) {
-            throw new AirbrakeConnectionException('There has been an error comunicating with the Airbrake service.');
-        }
-
-        if (array_key_exists('id', $airbrakeResponse)) {
+        if (true === is_array($airbrakeResponse) && array_key_exists('id', $airbrakeResponse)) {
             return true;
         }
 
-        throw new AirbrakeConnectionException($airbrakeResponse['error']);
+        return false;
     }
 
     /**

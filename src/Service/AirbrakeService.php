@@ -62,8 +62,9 @@ class AirbrakeService
         array $ignoredExceptions,
         string $environment,
         string $appVersion
-    ) {
-    
+    )
+    {
+
         $this->notifier = $notifierBuilder
             ->withProjectKey($projectKey)
             ->withProjectId($projectId)
@@ -91,6 +92,10 @@ class AirbrakeService
     public function notify(\Exception $exception): bool
     {
         $airbrakeResponse = $this->notifier->notify($exception);
+
+        if (false === is_array($airbrakeResponse)) {
+            throw new AirbrakeConnectionException('There has been an error comunicating with the Airbrake service.');
+        }
 
         if (array_key_exists('id', $airbrakeResponse)) {
             return true;

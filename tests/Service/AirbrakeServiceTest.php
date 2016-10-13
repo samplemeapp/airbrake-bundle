@@ -110,10 +110,9 @@ class AirbrakeServiceTest extends \PHPUnit_Framework_TestCase
         $notifierProperty->setAccessible(true);
         $notifierProperty->setValue($airbrakeService, $notifierMock);
 
-        $this->expectException('SM\AirbrakeBundle\Exception\AirbrakeConnectionException');
-        $this->expectExceptionMessage('This is a mock test');
+        $response = $airbrakeService->notify(new \Exception);
 
-        $airbrakeService->notify(new \Exception);
+        $this->assertFalse($response);
     }
 
     public function testGivenThatTheAirbrakeNotificationDidNotEncounterAnErrorThenTheNotifyMethodWillReturnTrue()
